@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+    api:
+        build:
+            context: .
+        volumes:
+            - .:/api
+        env_file:
+            - ./.env
+        ports:
+            - "8080:5000"
+        # environment:
+        #     POSTGRES_URI: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:${MONGO_PORT}/${MONGO_DB_NAME}?authSource=admin #or mongodb://mongo:27017/stockwatch
+        depends_on:
+            - postgresdb
+        stdin_open: true # For pdb
+        tty: true # For pdb
+        # command:
+        #     [
+        #         "./wait-for-it.sh",
+        #         "postgresdb:5432",
+        #         "--",
+        #         "pipenv",
+        #         "run",
+        #         "flask",
+        #         "run",
+        #     ]
+    postgresdb:
+        image: postgres
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
+        volumes:
+            - ./postgres-fin-data:/var/lib/postgresql/data
+volumes:
+    postgres-fin-data:
+        name: postgres-fin-data
+        # driver: local # default driver is local
