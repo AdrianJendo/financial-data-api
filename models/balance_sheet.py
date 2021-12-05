@@ -20,7 +20,7 @@ class BalanceSheetModel(db.Model):
     # accounts_payable = db.Column(db.Integer)
     # accrued_expenses = db.Column(db.Integer)
     # deferred_revenue = db.Column(db.Integer)
-    # current_liabilties = db.Column(db.Integer)
+    # current_liabilities = db.Column(db.Integer)
     # total_liabilities = db.Column(db.Integer)
     # equity = db.Column(db.Integer)
     # retained_earnings = db.Column(db.Integer)

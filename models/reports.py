@@ -9,7 +9,25 @@ class ReportModel(db.Model):
     symbol = db.Column(db.String, primary_key=True)
     start_date = db.Column(db.Date)
     end_date = db.Column(db.Date, primary_key=True)
-    # report_date = db.Column(db.Date)
+    # filing_date = db.Column(db.Date)
+    income_statement = db.relationship(
+        "IncomeStatementModel",
+        uselist=False,
+        backref="reports",
+        cascade="all, delete-orphan",
+    )
+    balance_sheet = db.relationship(
+        "BalanceSheetModel",
+        uselist=False,
+        backref="reports",
+        cascade="all, delete-orphan",
+    )
+    cash_flow = db.relationship(
+        "CashFlowModel",
+        uselist=False,
+        backref="reports",
+        cascade="all, delete-orphan",
+    )
 
     def __init__(
         self,
@@ -29,4 +47,11 @@ class ReportModel(db.Model):
             "symbol": self.symbol,
             "start_date": self.start_date.strftime("%Y-%m-%d"),
             "end_date": self.end_date.strftime("%Y-%m-%d"),
+            "income_statement": self.income_statement.to_json()
+            if self.income_statement
+            else None,
+            "balance_sheet": self.balance_sheet.to_json()
+            if self.balance_sheet
+            else None,
+            "cash_flow": self.cash_flow.to_json() if self.cash_flow else None,
         }

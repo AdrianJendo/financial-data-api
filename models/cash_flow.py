@@ -1,8 +1,8 @@
 from app import db
 
 
-class IncomeStatementModel(db.Model):
-    __tablename__ = "income_statement"
+class CashFlowModel(db.Model):
+    __tablename__ = "cash_flow"
     report_id = db.Column(
         db.Integer, db.ForeignKey("reports.report_id"), primary_key=True
     )

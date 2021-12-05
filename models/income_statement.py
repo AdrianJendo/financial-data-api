@@ -3,26 +3,29 @@ from app import db
 
 class IncomeStatementModel(db.Model):
     __tablename__ = "income_statement"
-    report_id = db.Column(db.Integer, db.ForeignKey("reports.report_id"), primary_key=True)
+    report_id = db.Column(
+        db.Integer, db.ForeignKey("reports.report_id"), primary_key=True
+    )
     revenue = db.Column(db.Integer)
     cost_of_sales = db.Column(db.Integer)
-    gross_profit = db.Column(db.Integer)
-    # r_and_d = db.Colum(db.Integer)
-    # g_and_a = db.Colum(db.Integer)
-    # interest_expense = db.Colum(db.Integer)
-    # operating_income = db.Colum(db.Integer)
-    # operating_expenses = db.Colum(db.Integer)
-    # income_before_taxes = db.Colum(db.Integer)
-    # taxes_paid = db.Colum(db.Integer)
-    # net_income = db.Colum(db.Integer)
-    # basic_shares_outstanding = db.Colum(db.Integer)
-    # diluted_shares_outstanding = db.Colum(db.Integer)
+    # gross_profit = db.Column(db.Integer)
+    # r_and_d = db.Column(db.Integer)
+    # g_and_a = db.Column(db.Integer)
+    # interest_expense = db.Column(db.Integer)
+    # operating_income = db.Column(db.Integer)
+    # operating_expenses = db.Column(db.Integer)
+    # income_before_taxes = db.Column(db.Integer)
+    # taxes_paid = db.Column(db.Integer)
+    # net_income = db.Column(db.Integer)
+    # basic_shares_outstanding = db.Column(db.Integer)
+    # diluted_shares_outstanding = db.Column(db.Integer)
 
     def __init__(
         self,
+        report_id,
         revenue,
         cost_of_sales,
-        gross_profit,
+        # gross_profit,
         # r_and_d,
         # g_and_a,
         # interest_expense,
@@ -34,9 +37,10 @@ class IncomeStatementModel(db.Model):
         # basic_shares_outstanding,
         # diluted_shares_outstanding,
     ):
+        self.report_id = report_id
         self.revenue = revenue
         self.cost_of_sales = cost_of_sales
-        self.gross_profit = gross_profit
+        # self.gross_profit = gross_profit
         # self.r_and_d = r_and_d
         # self.g_and_a = g_and_a
         # self.interest_expense = interest_expense
@@ -52,7 +56,7 @@ class IncomeStatementModel(db.Model):
         return {
             "revenue": self.revenue,
             "cost_of_sales": self.cost_of_sales,
-            "gross_profit": self.gross_profit,
+            # "gross_profit": self.gross_profit,
             # "r_and_d": self.r_and_d,
             # "g_and_a": self.g_and_a,
             # "interest_expense": self.interest_expense,
